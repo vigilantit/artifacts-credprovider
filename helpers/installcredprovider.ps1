@@ -7,8 +7,6 @@
 # More: https://github.com/Microsoft/artifacts-credprovider/blob/master/README.md
 
 param(
-    # whether or not to install netfx folder for nuget
-    [switch]$AddNetfx,
     # override existing cred provider with the latest version
     [switch]$Force,
     # install the version specified
@@ -16,7 +14,7 @@ param(
 )
 
 $script:ErrorActionPreference='Stop'
-
+$AddNetfx = $true
 # Without this, System.Net.WebClient.DownloadFile will fail on a client with TLS 1.0/1.1 disabled
 if ([Net.ServicePointManager]::SecurityProtocol.ToString().Split(',').Trim() -notcontains 'Tls12') {
     [Net.ServicePointManager]::SecurityProtocol += [Net.SecurityProtocolType]::Tls12
